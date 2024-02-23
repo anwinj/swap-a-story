@@ -14,7 +14,7 @@ function Request({request}) {
                   <i className="fa-solid fa-arrow-right-arrow-left fa-2xl"></i>
                   <div>
                     <h5 className='text-2xl font-bold'>{request.bookName2}</h5>
-                    <h6 className='text-xl font-light '>{request.bookName2}</h6>
+                    <h6 className='text-xl font-light '>{request.bookAuthor2}</h6>
                   </div>
                   <img width={'140px'} src={`${SERVER_URL}/uploads/${request.bookImage2}`} alt="" />
                   {/* <button className='bg-green-600 p-3 text-slate-200 rounded'>Approve<i class="fa-solid fa-check ms-2"></i></button>

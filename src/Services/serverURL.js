@@ -1,0 +1,1 @@
+export const SERVER_URL = "https://swap-a-story-server.onrender.com"

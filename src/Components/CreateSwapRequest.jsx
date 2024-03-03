@@ -37,6 +37,8 @@ function CreateSwapRequest({bookDetails}) {
     const bookImage2 = allBooks[bookIndex].bookImage
     const userId1 = bookDetails.userId
     const userId2 = allBooks[bookIndex].userId
+    const bookId1 = bookDetails._id
+    const bookId2 = allBooks[bookIndex]._id
     console.log(bookName1,bookName2,bookAuthor1,bookAuthor2,bookImage1,bookImage2,userId1,userId2);
 
     const token = sessionStorage.getItem("token")
@@ -45,7 +47,7 @@ function CreateSwapRequest({bookDetails}) {
         "Content-Type":"application/json",
         "Authorization":`Bearer ${token}`
       }
-      const result = await createRequestAPI({bookName1,bookName2,bookAuthor1,bookAuthor2,bookImage1,bookImage2,userId1,userId2},reqHeader)
+      const result = await createRequestAPI({bookName1,bookName2,bookAuthor1,bookAuthor2,bookImage1,bookImage2,userId1,userId2,bookId1,bookId2},reqHeader)
       if(result.status==200){
         console.log(result.data);
         toast.success("Swap Request Send..")

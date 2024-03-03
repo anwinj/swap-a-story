@@ -1,1 +1,1 @@
-export const SERVER_URL = "https://swap-a-story-server.onrender.com"
+export const SERVER_URL = "http://localhost:3000"

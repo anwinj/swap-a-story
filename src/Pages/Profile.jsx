@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import SideBar from '../Components/SideBar'
-import { getUserBooksAPI, viewRequestAPI } from '../Services/allAPI'
+import { getUserBooksAPI, viewRecievedRequestAPI } from '../Services/allAPI'
 
 function Profile() {
 
@@ -38,7 +38,7 @@ function Profile() {
         "Content-Type":"application/json",
         "Authorization":`Bearer ${token}`
       }
-      const result = await viewRequestAPI(reqHeader)
+      const result = await viewRecievedRequestAPI(reqHeader)
       if(result.status==200){
         console.log(result.data);
         setAllRequests(result.data)

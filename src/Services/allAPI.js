@@ -36,10 +36,16 @@ export const createRequestAPI = async(request,reqHeader)=>{
     return await commonAPI("POST",`${SERVER_URL}/create-request`,request,reqHeader)
 }
 
-// viewRequest API
-export const viewRequestAPI = async(reqHeader)=>{
-    return await commonAPI("GET",`${SERVER_URL}/view-requests`,"",reqHeader)
+// viewRecievedRequest API
+export const viewRecievedRequestAPI = async(reqHeader)=>{
+    return await commonAPI("GET",`${SERVER_URL}/view-recieved-requests`,"",reqHeader)
 }
+
+// viewSendRequest API
+export const viewSendRequestAPI = async(reqHeader)=>{
+    return await commonAPI("GET",`${SERVER_URL}/view-send-requests`,"",reqHeader)
+}
+
 
 // editBook API
 export const editBookAPI = async(id,reqBody,reqHeader)=>{

@@ -59,7 +59,7 @@ function Home({insideRegister}) {
                     navigate('/dashboard')
                     setLoginStatus(false)
                     setUserData({email:"",password:""})
-                }, 2300);
+                }, 1500);
             }
             else{
                 toast.warning(result.response.data)

@@ -99,7 +99,7 @@ function Profile() {
                 </div>
                 <div className='bg-slate-100 w-full shadow p-3 mb-3 rounded-lg flex flex-col justify-center items-center'>
                   <h2 className='text-8xl text-blue-800'>{allRequests.length}</h2>
-                  <p className='text-2xl mt-4'>No of pending swap requests</p>
+                  <p className='text-2xl mt-4'>No of Recieved swap requests</p>
                 </div>
               </div>
             </div>         

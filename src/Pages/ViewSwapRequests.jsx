@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import SideBar from '../Components/SideBar'
-import { approveRequestAPI, deleteRequestAPI, viewRecievedRequestAPI, viewSendRequestAPI } from '../Services/allAPI'
+import { approveRequestAPI, deleteBookAPI, deleteRequestAPI, viewRecievedRequestAPI, viewSendRequestAPI } from '../Services/allAPI'
 import { SERVER_URL } from '../Services/serverURL'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -58,6 +58,8 @@ function ViewSwapRequests() {
       const result = await approveRequestAPI(request,reqHeader)
       console.log(result);
       if(result.status==200){
+        await deleteBookAPI(result.data.bookId1,reqHeader)
+        await deleteBookAPI(result.data.bookId2,reqHeader)
         getRecievedUserRequests()
         toast.success("Request Approved")
       }

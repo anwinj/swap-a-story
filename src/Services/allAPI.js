@@ -56,3 +56,13 @@ export const editBookAPI = async(id,reqBody,reqHeader)=>{
 export const deleteBookAPI = async(id,reqHeader)=>{
     return await commonAPI("DELETE",`${SERVER_URL}/book/delete/${id}`,{},reqHeader)
 }
+
+// approveRequest API
+export const approveRequestAPI = async(reqBody,reqHeader)=>{
+    return await commonAPI("PUT",`${SERVER_URL}/approve-request`,reqBody,reqHeader)
+}
+
+// deleteRequest API
+export const deleteRequestAPI = async(id,reqHeader)=>{
+    return await commonAPI("DELETE",`${SERVER_URL}/request/delete/${id}`,{},reqHeader)
+}

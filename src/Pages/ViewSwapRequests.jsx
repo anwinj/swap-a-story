@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import SideBar from '../Components/SideBar'
-import { viewRecievedRequestAPI, viewSendRequestAPI } from '../Services/allAPI'
+import { approveRequestAPI, deleteRequestAPI, viewRecievedRequestAPI, viewSendRequestAPI } from '../Services/allAPI'
 import { SERVER_URL } from '../Services/serverURL'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function ViewSwapRequests() {
   
@@ -17,7 +20,7 @@ function ViewSwapRequests() {
       }
       const result = await viewRecievedRequestAPI(reqHeader)
       if(result.status==200){
-        console.log(result.data);
+        // console.log(result.data);
         setAllRecievedRequests(result.data)
       }
       else{
@@ -35,7 +38,7 @@ function ViewSwapRequests() {
       }
       const result = await viewSendRequestAPI(reqHeader)
       if(result.status==200){
-        console.log(result.data);
+        // console.log(result.  data);
         setAllSendRequests(result.data)
       }
       else{
@@ -44,10 +47,52 @@ function ViewSwapRequests() {
     }
   }
 
+  const approveRequest = async(request)=>{
+    // console.log(request);
+    const token = sessionStorage.getItem("token")
+    if(token){
+      const reqHeader = {
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${token}`
+      }
+      const result = await approveRequestAPI(request,reqHeader)
+      console.log(result);
+      if(result.status==200){
+        getRecievedUserRequests()
+        toast.success("Request Approved")
+      }
+      else{
+        toast.warning(result.message)
+        console.log(result.message);
+      }
+    }  
+  }
+
+  const deleteRequest = async(reqId)=>{
+    console.log(reqId);
+    const token = sessionStorage.getItem("token")
+    if(token){
+      const reqHeader = {
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${token}`
+      }
+      const result = await deleteRequestAPI(reqId,reqHeader)
+      console.log(result);
+      if(result.status==200){
+        toast.warning("Request deleted")
+        getRecievedUserRequests()
+      }
+      else{
+        toast.warning(result.message)
+      }
+    }  
+  }
+
   useEffect(()=>{
     getRecievedUserRequests()
     getSendUserRequests()
   },[])
+
 
   return (
     <>
@@ -82,8 +127,14 @@ function ViewSwapRequests() {
                             <h6 className='text-sm font-light '>{request.bookAuthor2}</h6>
                           </div>
                           <img width={'80px'} src={`${SERVER_URL}/uploads/${request.bookImage2}`} alt="" />
-                          <button className='bg-green-600 p-2 text-slate-200 rounded'><i className="fa-solid fa-check"></i></button>
-                          <button className='bg-red-600 p-2 text-slate-200 rounded'><i className="fa-solid fa-xmark"></i></button>
+                          {
+                            request.approved?<button className='bg-green-600 p-2 text-slate-200 rounded'>Approved</button>:
+                            <div>
+                              <button onClick={()=>approveRequest(request)} className='bg-green-600 p-2 text-slate-200 rounded me-4'><i className="fa-solid fa-check"></i></button>
+                              <button onClick={()=>deleteRequest(request?._id)} className='bg-red-600 p-2 text-slate-200 rounded'><i className="fa-solid fa-xmark"></i></button>
+                            </div>
+                          }
+                          
                         </div>
                       </div>
                     )):
@@ -133,6 +184,7 @@ function ViewSwapRequests() {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={2500} theme='colored' />
     </>
   )
 }

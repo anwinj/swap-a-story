@@ -90,7 +90,7 @@ function Dashboard() {
 
               {
                 allBooks?.length>0?allBooks.map((book,index)=>(
-                  <div className='mt-6'>
+                  <div key={index} className='mt-6'>
                     <div className='w-10/12 h-16 bg-slate-100 rounded-lg flex justify-between p-4 items-center'>
                       <div className='flex justify-center items-center '>
                         <h2 className='text-xl font-bold ms-3 me-5'>{book.title}  -</h2>
